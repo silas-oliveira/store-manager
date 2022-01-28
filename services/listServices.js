@@ -51,12 +51,14 @@ const createProduct = async (name, quantity) => {
   //   productsName(name).then((response) => {
   //   const objectError = { status: userAlready, message: 'Product already exists' };
   //    if (response !== []) throw objectError; 
-  //  })
+  //  });
 
   const objectError = { status: userAlready, message: 'Product already exists' };
 
   const response = await productsName(name);
-  if (response !== []) throw objectError;  
+  // console.log(response);
+  // console.log(typeof response);
+  if (response.length !== 0) throw objectError;  
 
   return create(name, quantity).then((result) => {
     const product = { name, quantity, id: result };
