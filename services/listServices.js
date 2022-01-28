@@ -7,12 +7,6 @@ const errorLength = 422;
 const userAlready = 409;
 // const sucessStatus = 409;
 
-// const nameProducts = (name) => productsName().then((products) => {
-//  const productsList = products.map((product) => product.name === name);
-//  return productsList;
-// });
-// console.log('promesses', typeof nameProducts, nameProducts);
-
 const productSchema = Joi.object({
   name: Joi.string().min(5).required().messages({
     'string.base': '"name" must be a string',
@@ -56,8 +50,6 @@ const createProduct = async (name, quantity) => {
   const objectError = { status: userAlready, message: 'Product already exists' };
 
   const response = await productsName(name);
-  // console.log(response);
-  // console.log(typeof response);
   if (response.length !== 0) throw objectError;  
 
   return create(name, quantity).then((result) => {
@@ -69,29 +61,3 @@ const createProduct = async (name, quantity) => {
 module.exports = {
   createProduct,
 };
-
-// create(name, quantity).then((result) => {
-//   const product = { name, quantity, id: result };
-//   return product;
-
-// const ValidationSchemas = Joi.object({
-//   name: Joi.string().min(6).required().messages({
-//       "string.empty":"Display name cannot be empty",
-//       "string.min":"Min 6 characteers"
-//   }).optional(),
-//   email: Joi.string().min(6).required().email().message("Must be a valid email address"),
-//   password:Joi.string().min(6).required().message("Password is required!")
-// })
-
-// const ValidationSchemas = Joi.object({    
-//   name: Joi.string()  
-//     .min(6)
-//     .required()
-//     .messages({
-//       'string.empty': 'Display name cannot be empty',
-//       'string.min': 'Min 6 characteers',
-//     })
-//     .optional(),
-//   email: Joi.string().min(6).required().email().message('Must be a valid email address'),
-//   password: Joi.string().required().min(6).message('Password is required!'),
-// });

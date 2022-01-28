@@ -14,8 +14,6 @@ const create = (name, quantity) => {
     .then(([rows]) => rows.insertId);
 };
 
-console.log(create);
-
 module.exports = {
   create,
   productsName,
