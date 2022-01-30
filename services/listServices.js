@@ -21,7 +21,7 @@ const productSchema = Joi.object({
     'number.required': '"quantity" is required',
   }),
   // id: Joi.number().messages({
-  //   'number.required': 'Product not found',
+  //   'number.any': 'Product not found',
   // }),
 });
 
@@ -40,13 +40,14 @@ const getStatus = (error) => {
 };
 
 const createProduct = async (name, quantity) => {
+  // console.log('params', name, quantity);
+  // const oshiro = { name, quantity };
+  // console.log('oshiro', oshiro);
   const { error } = productSchema.validate({ name, quantity });
-  console.log('error joi', error);
   // console.log(error);
   
   if (error) {
     const objError = { status: getStatus(error.message), message: error.message };
-    console.log('getStatus', getStatus(error.message));
     throw objError;
   }
 
@@ -75,7 +76,7 @@ const createProduct = async (name, quantity) => {
 //     console.log('objError', objectError);
 //     throw objectError;
 //   }
-//   console.log('a', result);
+//   console.log('vitao', result);
 //   return create(result).then((response) => {
 //     const product = response;
 //     console.log('product', product);
@@ -119,10 +120,22 @@ const getProduct = async (id) => {
   const product = await getById(id);
 
   if (product.length === 0) {
-    return { status: 404, message: 'Product not found' };
+    const objError = { status: 404, message: 'Product not found' };
+    throw objError;
   }
 
-  return product;
+  // if (error) {
+  //   const objError = { status: 404, message: error.message };
+  //   throw objError;
+  // }
+
+  const objectProduct = {
+    id: product[0].id,
+    name: product[0].name,
+    quantity: product[0].quantity,
+  };
+
+  return objectProduct;
 };
 
 const getProducts = async () => {

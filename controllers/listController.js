@@ -38,17 +38,19 @@ const createNewProduct = (req, res, next) => {
 //   //     });
 // };
 
-const getProductById = async (req, res) => {
-  const { id } = req.params;
-  const result = await getProduct(id);
+const getProductById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await getProduct(id);
 
-  const { status, message } = result;
-  
-    if (id) {
-   return res.status(200).json(result);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
   }
- return res.status(status).json(message);
 };
+// if (result.length === 0) {
+//   return res.status(404).json(message);
+// }
 
 const getAll = async (req, res) => {
   const result = await getProducts();

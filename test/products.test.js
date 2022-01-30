@@ -194,7 +194,7 @@ describe("Products", () => {
     });
   }, 50000);
 
-  describe("2 - Crie um endpoint para listar os produtos", () => {
+  describe.only("2 - Crie um endpoint para listar os produtos", () => {
     it("Será validado que todos produtos estão sendo retornados", async () => {
       await frisby
         .get(`${url}/products`)
@@ -260,7 +260,7 @@ describe("Products", () => {
           expect(quantityProduct).toEqual(40);
         });
     });
-  });
+  }, 50000);
 
   describe("3 - Crie um endpoint para atualizar um produto", () => {
     it("Será validado que não é possível atualizar um produto com o nome menor que 5 caracteres", async () => {
