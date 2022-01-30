@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const error = require('./middlewares/errorMiddleware');
-const { createNewProduct } = require('./controllers/listController');
+const { createNewProduct, getProductById, getAll } = require('./controllers/listController');
 
 const app = express();
 
@@ -15,6 +15,9 @@ app.get('/', (_request, response) => {
 });
 
 app.post('/products', createNewProduct);
+
+app.get('/products/:id', getProductById);
+app.get('/products', getAll);
 
 app.use(error);
 

@@ -192,7 +192,7 @@ describe("Products", () => {
           expect(body).toHaveProperty("id");
         });
     });
-  });
+  }, 50000);
 
   describe("2 - Crie um endpoint para listar os produtos", () => {
     it("Será validado que todos produtos estão sendo retornados", async () => {
