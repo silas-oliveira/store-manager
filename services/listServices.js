@@ -6,6 +6,7 @@ const { create,
   getById,
   getAllProducts,
   update,
+  delet,
 } = require('../models/productRegistration');
 
 // const errorRequired = 400;
@@ -65,11 +66,11 @@ const productSchema = Joi.object({
             const objectError = { status: userAlready, message: 'Product already exists' };
             
             const response = await productsName(name);
-            console.log('product Create', response);
+            // console.log('product Create', response);
             if (response.length !== 0) throw objectError;  
             
             return create(name, quantity).then((result) => {
-              console.log('result create', result);
+              // console.log('result create', result);
               const product = { name, quantity, id: result };
               return product;
             });
@@ -151,7 +152,7 @@ const getProducts = async () => {
 };
 
 const updateProduct = async (name, quantity, id) => {
-  console.log('teste', quantity);
+  // console.log('teste', quantity);
   const { error } = productSchema.validate({ name, quantity });
   if (typeof quantity === 'string') {
     const objError = { 
@@ -176,6 +177,18 @@ const updateProduct = async (name, quantity, id) => {
   return infoUpdate;
 };
 
+const deletProduct = async (id) => {
+  const [infoDelete] = await getById(id);
+  const req = await delet(id);
+  console.log('id service result', req);
+
+  if (req.affectedRows === 0) {
+    const objectError = { status: 404, message: 'Product not found' };
+    throw objectError;
+  }
+  return infoDelete;
+};
+
 module.exports = {
   createProduct,
   // createList,
@@ -183,4 +196,5 @@ module.exports = {
   getProduct,
   getProducts,
   updateProduct,
+  deletProduct,
 };

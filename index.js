@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const error = require('./middlewares/errorMiddleware');
 const { createNewProduct,
-  getProductById, getAll, getUpdateProduct } = require('./controllers/listController');
+  getProductById, 
+  getAll, getUpdateProduct, getDeletProduct } = require('./controllers/listController');
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.get('/', (_request, response) => {
 });
 
 app.post('/products', createNewProduct);
+
+app.delete('/products/:id', getDeletProduct);
 
 app.get('/products/:id', getProductById);
 app.get('/products', getAll);

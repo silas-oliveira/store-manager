@@ -55,7 +55,7 @@ const create = (name, quantity) => {
 const getById = async (id) => {
   const query = 'SELECT * FROM products WHERE id = ?';
   const [req] = await connection.execute(query, [id]);
-  console.log('id', req);
+  // console.log('id', req);
   return req;
 };
 
@@ -71,8 +71,16 @@ const update = async (name, quantity, id) => {
   // connection.execute(query, [name, quantity, id])
   //   .then(([req]) => console.log('req models', req.changedRows));
   const [req] = await connection.execute(query, [name, quantity, id]);
-  console.log('req models', req.changedRows);
+  // console.log('req models', req.changedRows);
   return req.changedRows;
+};
+
+const delet = async (id) => {
+  const query = 'DELETE FROM products WHERE id = ?';
+
+  const [req] = await connection.execute(query, [id]);
+  console.log('model result', req);
+  return req;
 };
 
 module.exports = {
@@ -82,4 +90,5 @@ module.exports = {
   getById,
   getAllProducts,
   update,
+  delet,
 };
