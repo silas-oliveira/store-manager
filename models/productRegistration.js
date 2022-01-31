@@ -46,7 +46,7 @@ const create = (name, quantity) => {
 
 // const get = async (id) => {
 //   const queryID = 'SELECT * FROM products WHERE id = ?';
-  
+
 //   const req = await connection.execute(queryID, [id]);
 //   console.log('req', req);
 //   return [req];
@@ -65,10 +65,21 @@ const getAllProducts = async () => {
   return req;
 };
 
+const update = async (name, quantity, id) => {
+  const query = 'UPDATE products SET name = ?, quantity = ? WHERE id = ?';
+
+  // connection.execute(query, [name, quantity, id])
+  //   .then(([req]) => console.log('req models', req.changedRows));
+  const [req] = await connection.execute(query, [name, quantity, id]);
+  console.log('req models', req.changedRows);
+  return req.changedRows;
+};
+
 module.exports = {
   create,
   productsName,
   // productsList,
   getById,
   getAllProducts,
+  update,
 };

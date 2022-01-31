@@ -1,4 +1,7 @@
-const { createProduct, getProduct, getProducts } = require('../services/listServices');
+const { createProduct,
+  getProduct,
+  getProducts,
+  updateProduct } = require('../services/listServices');
 
 const createNewProduct = (req, res, next) => {
   const { name, quantity } = req.body;
@@ -57,10 +60,25 @@ const getAll = async (req, res) => {
   return res.status(200).json(result);
 };
 
+const getUpdateProduct = async (req, res, next) => {
+  console.log('req body', req.body);
+  console.log('req.params', req.params);
+  const { name, quantity } = req.body;
+  const { id } = req.params;
+  try {
+    const result = await updateProduct(name, quantity, id);
+    console.log('result controler', result);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createNewProduct,
   // getListOrId,
   // getNewProduct,
   getProductById,
   getAll,
+  getUpdateProduct,
 };
