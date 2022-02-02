@@ -6,7 +6,8 @@ const error = (err, _req, res, _next) => {
     return res.status(status).json({ message });
   }
   console.log(err);
-  return res.status(500).json({ message: 'Internal Error' });
+  // return res.status(500).json({ message: 'Internal Error' });
+  return res.status(500).json({ message: err.message });
 };
 
 module.exports = error;

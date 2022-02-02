@@ -3,7 +3,7 @@ const connection = require('./connection');
 const products = async (insertId, productId, quantity) => {
   console.log(productId, quantity);
   // const saleID = 1;
-  // console.log('saleID', saleId);
+  console.log('models teste', insertId, productId, quantity);
   const query = 'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)';
 
   // const query2 = 'SELECT id FROM products WHERE id = ?';

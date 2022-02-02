@@ -8,7 +8,7 @@ const getSalesProducts = async (req, res, next) => {
   
     const newObject = { id: result, itemsSold: req.body };
   
-    res.status(200).json(newObject);
+    res.status(201).json(newObject);
   } catch (error) {
     next(error);
   }
