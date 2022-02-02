@@ -1,4 +1,5 @@
 const { products, sales } = require('../models/productsSales');
+const { list, salesId } = require('../models/salesModel');
 
 const validateProductId = (reqBody) => {
   const test = reqBody.some((sale) => sale.product_id);
@@ -38,6 +39,25 @@ const salesProduct = async (reqBody) => {
   return insertId;
 };
 
+const salesList = async () => {
+  const req = await list();
+  console.log('services', req);
+
+  return req;
+};
+
+const salesById = async (id) => {
+  const req = await salesId(id);
+  if (req.length !== 0) {
+    console.log('services', req);
+    return req;
+  }
+  const objError = { status: 404, message: 'Sale not found' };
+  throw objError;
+};
+
 module.exports = {
   salesProduct,
+  salesList,
+  salesById,
 };

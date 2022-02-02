@@ -4,7 +4,7 @@ const error = require('./middlewares/errorMiddleware');
 const { createNewProduct,
   getProductById, 
   getAll, getUpdateProduct, getDeletProduct } = require('./controllers/listController');
-const { getSalesProducts } = require('./controllers/salesController');
+const { getSalesProducts, getSalesList, getSalesById } = require('./controllers/salesController');
 
 const app = express();
 
@@ -27,6 +27,9 @@ app.get('/products', getAll);
 app.put('/products/:id', getUpdateProduct);
 
 app.post('/sales', getSalesProducts);
+
+app.get('/sales/:id', getSalesById);
+app.get('/sales', getSalesList);
 
 app.use(error);
 
