@@ -1,10 +1,12 @@
 const connection = require('./connection');
 
-const productsName = (name) => {
+const productsName = async (name) => {
   const query = 'SELECT name FROM products WHERE name = ?';
-
-  return connection.execute(query, [name])
-    .then(([rows]) => rows);
+  const [req] = await connection.execute(query, [name]);
+  console.log('models', req);
+  return req;
+  // return connection.execute(query, [name])
+  //   .then(([rows]) => console.log('name model', rows));
 };
 
 const create = (name, quantity) => {
@@ -55,13 +57,13 @@ const create = (name, quantity) => {
 const getById = async (id) => {
   const query = 'SELECT * FROM products WHERE id = ?';
   const [req] = await connection.execute(query, [id]);
-  // console.log('id', req);
   return req;
 };
 
 const getAllProducts = async () => {
   const query = 'SELECT * FROM products';
   const [req] = await connection.execute(query);
+  console.log('getall', req);
   return req;
 };
 
@@ -79,7 +81,7 @@ const delet = async (id) => {
   const query = 'DELETE FROM products WHERE id = ?';
 
   const [req] = await connection.execute(query, [id]);
-  console.log('model result', req);
+  // console.log('model result', req);
   return req;
 };
 

@@ -22,6 +22,7 @@ const validateQuantity = (reqBody) => {
       throw testNumber;
     }
   });
+  console.log(test);
   return test; 
 };
 
