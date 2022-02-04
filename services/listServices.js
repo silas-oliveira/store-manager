@@ -132,10 +132,10 @@ const deletProduct = async (id) => {
   const req = await delet(id);
   console.log('id service result', req);
 
-  // if (req.affectedRows === 0) {
-  //   const objectError = { status: 404, message: 'Product not found' };
-  //   throw objectError;
-  // }
+  if (req.affectedRows === 0) {
+    const objectError = { status: 404, message: 'Product not found' };
+    throw objectError;
+  }
   return infoDelete;
 };
 
