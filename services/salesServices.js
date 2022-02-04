@@ -61,4 +61,5 @@ module.exports = {
   salesProduct,
   salesList,
   salesById,
+  validateProductId,
 };

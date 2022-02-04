@@ -81,7 +81,6 @@ const delet = async (id) => {
   const query = 'DELETE FROM products WHERE id = ?';
 
   const [req] = await connection.execute(query, [id]);
-  // console.log('model result', req);
   return req;
 };
 
